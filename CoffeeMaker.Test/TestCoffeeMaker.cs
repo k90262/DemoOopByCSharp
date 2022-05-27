@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using M4CoffeeMaker;
 
 namespace CoffeeMaker.Test
 {

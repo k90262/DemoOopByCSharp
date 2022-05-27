@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'DesignMarkIV' " />
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
