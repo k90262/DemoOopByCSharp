@@ -39,7 +39,7 @@ namespace M4CoffeeMaker
             throw new NotImplementedException();
         }
 
-        public void SetWarmerState(WarmerPlateStatus s)
+        public void SetWarmerState(WarmerState s)
         {
             throw new NotImplementedException();
         }

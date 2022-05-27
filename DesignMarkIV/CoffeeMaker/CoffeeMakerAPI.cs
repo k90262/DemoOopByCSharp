@@ -76,7 +76,7 @@ namespace CoffeeMaker
 		 * 這函式負責開、關保溫盤中的元件。
 		 */
 
-		void SetWarmerState(WarmerPlateStatus s);
+		void SetWarmerState(WarmerState s);
 
 		/*
 		 * 這函式負責開、關指示燈。

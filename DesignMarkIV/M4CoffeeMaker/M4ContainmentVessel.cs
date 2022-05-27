@@ -25,7 +25,18 @@ namespace M4CoffeeMaker
 			isBrewing = true;
         }
 
-		public void Poll() { }
+		public void Poll()
+		{
+			WarmerPlateStatus potStatus = api.GetWarmerPlateStatus();
+
+			if (potStatus == WarmerPlateStatus.POT_NOT_EMPTY)
+			{
+				api.SetWarmerState(WarmerState.ON);
+			}
+			else {
+				api.SetWarmerState(WarmerState.OFF);
+			}
+		}
     }
 }
 

@@ -7,10 +7,16 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'DesignMarkIV' " />
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="CoffeeMaker\" />
+    <Folder Include="M4CoffeeMaker\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="CoffeeMaker\" />
+    <None Remove="M4CoffeeMaker\" />
+  </ItemGroup>
 </Project>
