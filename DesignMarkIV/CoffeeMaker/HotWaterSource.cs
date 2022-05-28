@@ -14,9 +14,9 @@ namespace CoffeeMaker
 
 		public abstract bool IsReady();
 		public abstract void Start();
-		public void Pause() { }
-		public void Resume() { }
-		public void Done() { }
+		public abstract void Pause();
+		public abstract void Resume();
+		public abstract void Done();
 	}
 }
 

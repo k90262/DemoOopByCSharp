@@ -29,11 +29,27 @@ namespace M4CoffeeMaker
 		{
 			WarmerPlateStatus potStatus = api.GetWarmerPlateStatus();
 
+			if (isBrewing)
+			{
+				HandleBrewingEvent(potStatus);
+			}
+		}
+
+		private void HandleBrewingEvent(WarmerPlateStatus potStatus)
+		{
 			if (potStatus == WarmerPlateStatus.POT_NOT_EMPTY)
 			{
+				ContainerAvailable();
 				api.SetWarmerState(WarmerState.ON);
 			}
-			else {
+			else if (potStatus == WarmerPlateStatus.WARMER_EMPTY)
+			{
+				ContainerUnavailable();
+				api.SetWarmerState(WarmerState.OFF);
+			}
+			else
+			{   // potStatus == POT_EMPTY
+				ContainerAvailable();
 				api.SetWarmerState(WarmerState.OFF);
 			}
 		}

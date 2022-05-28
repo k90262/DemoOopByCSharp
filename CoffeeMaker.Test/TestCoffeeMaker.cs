@@ -29,7 +29,7 @@ namespace CoffeeMaker.Test
         public WarmerPlateStatus GetWarmerPlateStatus()
         {
             if (!potPresent)
-                return WarmerPlateStatus.POT_EMPTY;
+                return WarmerPlateStatus.WARMER_EMPTY;
             else if (potNotEmpty)
                 return WarmerPlateStatus.POT_NOT_EMPTY;
             else
@@ -168,6 +168,66 @@ namespace CoffeeMaker.Test
             Assert.IsFalse(api.lightOn);
             Assert.IsTrue(api.plateOn);
             Assert.IsTrue(api.valveClosed);
+        }
+
+        [Test]
+        public void PotRemovedAndReplacedWhileEmpty()
+        {
+            NormalStart();
+            api.potPresent = false;
+            Poll();
+            Assert.IsFalse(api.boilerOn);
+            Assert.IsFalse(api.lightOn);
+            Assert.IsFalse(api.plateOn);
+            Assert.IsFalse(api.valveClosed);
+
+            api.potPresent = true;
+            Poll();
+            Assert.IsTrue(api.boilerOn);
+            Assert.IsFalse(api.lightOn);
+            Assert.IsFalse(api.plateOn);
+            Assert.IsTrue(api.valveClosed);
+        }
+
+        [Test]
+        public void PotRemovedWhileNotEmptyAndReplacedEmpty()
+        {
+            NormalFill();
+            api.potPresent = false;
+            Poll();
+            Assert.IsFalse(api.boilerOn);
+            Assert.IsFalse(api.lightOn);
+            Assert.IsFalse(api.plateOn);
+            Assert.IsFalse(api.valveClosed);
+
+            api.potPresent = true;
+            api.potNotEmpty = false;
+            Poll();
+            Assert.IsTrue(api.boilerOn);
+            Assert.IsFalse(api.lightOn);
+            Assert.IsFalse(api.plateOn);
+            Assert.IsTrue(api.valveClosed);
+        }
+
+        [Test]
+        public void PotRemovedWhileNotEmptyAndReplacedNotEmpty()
+        {
+            NormalFill();
+            api.potPresent = false;
+            Poll();
+            api.potPresent = true;
+            Poll();
+            Assert.IsTrue(api.boilerOn);
+            Assert.IsFalse(api.lightOn);
+            Assert.IsTrue(api.plateOn);
+            Assert.IsTrue(api.valveClosed);
+        }
+
+        private void NormalFill()
+        {
+            NormalStart();
+            api.potNotEmpty = true;
+            Poll();
         }
     }
 }

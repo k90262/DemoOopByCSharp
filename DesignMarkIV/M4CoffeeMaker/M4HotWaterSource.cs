@@ -28,6 +28,23 @@ namespace M4CoffeeMaker
 		public void Poll()
 		{
 		}
+
+        public override void Pause()
+        {
+			api.SetBoilerState(BoilerState.OFF);
+			api.SetReleifValveState(ReliefValveState.OPEN);
+        }
+
+        public override void Resume()
+        {
+			api.SetBoilerState(BoilerState.ON);
+			api.SetReleifValveState(ReliefValveState.CLOSED);
+        }
+
+        public override void Done()
+        {
+            
+        }
     }
 }
 
