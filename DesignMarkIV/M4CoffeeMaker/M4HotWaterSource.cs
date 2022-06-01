@@ -19,7 +19,7 @@ namespace M4CoffeeMaker
 			return status == BoilerStatus.NOT_EMPTY;
 		}
 
-        public override void Start()
+        public override void StartBrewing()
         {
 			api.SetReleifValveState(ReliefValveState.CLOSED);
 			api.SetBoilerState(BoilerState.ON);
@@ -27,6 +27,16 @@ namespace M4CoffeeMaker
 
 		public void Poll()
 		{
+			BoilerStatus boilerStatus = api.GetBoilerStatus();
+			if (isBrewing)
+			{
+				if (boilerStatus == BoilerStatus.EMPTY)
+				{
+					api.SetBoilerState(BoilerState.OFF);
+					api.SetReleifValveState(ReliefValveState.CLOSED);
+					DeclareDone();
+				}
+			}
 		}
 
         public override void Pause()
@@ -39,11 +49,6 @@ namespace M4CoffeeMaker
         {
 			api.SetBoilerState(BoilerState.ON);
 			api.SetReleifValveState(ReliefValveState.CLOSED);
-        }
-
-        public override void Done()
-        {
-            
         }
     }
 }

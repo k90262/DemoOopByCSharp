@@ -21,6 +21,16 @@ namespace M4CoffeeMaker
 				StartBrewing();
 			}
 		}
-	}
+
+		public override void Done()
+		{
+			api.SetIndicatorState(IndicatorState.ON);
+		}
+
+        public override void CompleteCycle()
+        {
+			api.SetIndicatorState(IndicatorState.OFF);
+		}
+    }
 }
 

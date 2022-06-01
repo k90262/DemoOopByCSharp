@@ -5,6 +5,14 @@ namespace CoffeeMaker
 	{
 		private UserInterface ui;
 		private HotWaterSource hws;
+		protected bool isBrewing;
+		protected bool isComplete;
+
+		public ContainmentVessel()
+		{
+			isBrewing = false;
+			isComplete = true;
+		}
 
 		public void Init(UserInterface ui, HotWaterSource hws)
 		{
@@ -13,8 +21,23 @@ namespace CoffeeMaker
 		}
 
 		public abstract bool IsReady();
-		public abstract void Start();
-		public void Done() { }
+
+		public void Start()
+		{
+			isBrewing = true;
+			isComplete = false;
+		}
+
+		public void Done()
+		{
+			isBrewing = false;
+		}
+
+		protected void DeclareComplete()
+		{
+			isComplete = true;
+			ui.Complete();
+		}
 
 		protected void ContainerAvailable()
 		{

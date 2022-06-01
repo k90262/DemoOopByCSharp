@@ -5,6 +5,12 @@ namespace CoffeeMaker
 	{
 		private UserInterface ui;
 		private ContainmentVessel cv;
+		protected bool isBrewing;
+
+		public HotWaterSource()
+		{
+			isBrewing = false;
+		}
 
 		public void Init(UserInterface ui, ContainmentVessel cv)
 		{
@@ -12,11 +18,28 @@ namespace CoffeeMaker
 			this.cv = cv;
 		}
 
+		public void Start()
+		{
+			isBrewing = true;
+			StartBrewing();
+		}
+
 		public abstract bool IsReady();
-		public abstract void Start();
+		public abstract void StartBrewing();
 		public abstract void Pause();
 		public abstract void Resume();
-		public abstract void Done();
+
+		public void Done()
+		{
+			isBrewing = false;
+		}
+
+		protected void DeclareDone()
+		{
+			ui.Done();
+			cv.Done();
+			isBrewing = false;
+		}
 	}
 }
 

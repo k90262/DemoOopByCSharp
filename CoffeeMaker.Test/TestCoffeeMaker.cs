@@ -65,7 +65,7 @@ namespace CoffeeMaker.Test
             plateOn = warmerState == WarmerState.ON;
         }
 
-        public void SetIndicatorSstate(IndicatorState indicatorState)
+        public void SetIndicatorState(IndicatorState indicatorState)
         {
             lightOn = indicatorState == IndicatorState.ON;
         }
@@ -209,6 +209,13 @@ namespace CoffeeMaker.Test
             Assert.IsTrue(api.valveClosed);
         }
 
+        private void NormalFill()
+        {
+            NormalStart();
+            api.potNotEmpty = true;
+            Poll();
+        }
+
         [Test]
         public void PotRemovedWhileNotEmptyAndReplacedNotEmpty()
         {
@@ -223,11 +230,22 @@ namespace CoffeeMaker.Test
             Assert.IsTrue(api.valveClosed);
         }
 
-        private void NormalFill()
+        [Test]
+        public void BoilerEmptyPotNotEmpty()
         {
-            NormalStart();
-            api.potNotEmpty = true;
+            NormalBrew();
+            Assert.IsFalse(api.boilerOn);
+            Assert.IsTrue(api.lightOn);
+            Assert.IsTrue(api.plateOn);
+            Assert.IsTrue(api.valveClosed);
+        }
+
+        private void NormalBrew()
+        {
+            NormalFill();
+            api.boilerEmpty = true;
             Poll();
         }
+
     }
 }

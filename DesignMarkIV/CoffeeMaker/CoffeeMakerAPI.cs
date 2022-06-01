@@ -83,7 +83,7 @@ namespace CoffeeMaker
 		 * 沖煮完成時，燈亮；使用者按下沖煮按鈕時，燈滅。
 		 */
 
-		void SetIndicatorSstate(IndicatorState s);
+		void SetIndicatorState(IndicatorState s);
 
 		/*
 		 * 這函式負責開、關減壓閥。

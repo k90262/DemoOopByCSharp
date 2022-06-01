@@ -7,7 +7,7 @@ namespace M4CoffeeMaker
 		                             , Pollable
 	{
 		private CoffeeMakerAPI api;
-		private bool isBrewing = false;
+		private WarmerPlateStatus lastPotStatus;
 
 		public M4ContainmentVessel(CoffeeMakerAPI api)
 		{
@@ -20,19 +20,23 @@ namespace M4CoffeeMaker
 			return status == WarmerPlateStatus.POT_EMPTY;
         }
 
-        public override void Start()
-        {
-			isBrewing = true;
-        }
-
 		public void Poll()
 		{
 			WarmerPlateStatus potStatus = api.GetWarmerPlateStatus();
 
-			if (isBrewing)
+			if (potStatus != lastPotStatus)
 			{
-				HandleBrewingEvent(potStatus);
+				if (isBrewing)
+				{
+					HandleBrewingEvent(potStatus);
+				}
+				else if (isComplete == false)
+				{
+					HandleIncompleteEvent(potStatus);
+				}
+				lastPotStatus = potStatus;
 			}
+
 		}
 
 		private void HandleBrewingEvent(WarmerPlateStatus potStatus)
@@ -51,6 +55,23 @@ namespace M4CoffeeMaker
 			{   // potStatus == POT_EMPTY
 				ContainerAvailable();
 				api.SetWarmerState(WarmerState.OFF);
+			}
+		}
+
+		private void HandleIncompleteEvent(WarmerPlateStatus potStatus)
+		{
+			if (potStatus == WarmerPlateStatus.POT_NOT_EMPTY)
+			{
+				api.SetWarmerState(WarmerState.ON);
+			}
+			else if (potStatus == WarmerPlateStatus.WARMER_EMPTY)
+			{
+				api.SetWarmerState(WarmerState.OFF);
+			}
+			else
+			{   // potStatus == POT_EMPTY
+				api.SetWarmerState(WarmerState.OFF);
+				DeclareComplete();
 			}
 		}
     }

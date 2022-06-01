@@ -1,10 +1,16 @@
 ﻿using System;
 namespace CoffeeMaker
 {
-	public class UserInterface
+	public abstract class UserInterface
 	{
 		private HotWaterSource hws;
 		private ContainmentVessel cv;
+		protected bool isComplete;
+
+		public UserInterface()
+		{
+			isComplete = true;
+		}
 
 		public void Init(HotWaterSource hws, ContainmentVessel cv)
 		{
@@ -12,16 +18,24 @@ namespace CoffeeMaker
 			this.cv = cv;
 		}
 
-		public void Done() { }
-		public void Complete() { }
+		public void Complete()
+		{
+			isComplete = true;
+			CompleteCycle();
+		}
+
 		protected void StartBrewing()
 		{
 			if (hws.IsReady() && cv.IsReady())
 			{
+				isComplete = false;
 				hws.Start();
 				cv.Start();
 			}
 		}
+
+		public abstract void Done();
+		public abstract void CompleteCycle();
 	}
 }
 

@@ -29,7 +29,7 @@ namespace M4CoffeeMaker
             throw new NotImplementedException();
         }
 
-        public void SetIndicatorSstate(IndicatorState s)
+        public void SetIndicatorState(IndicatorState s)
         {
             throw new NotImplementedException();
         }
