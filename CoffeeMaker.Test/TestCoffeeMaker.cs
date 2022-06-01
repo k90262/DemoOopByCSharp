@@ -247,5 +247,37 @@ namespace CoffeeMaker.Test
             Poll();
         }
 
+        [Test]
+        public void BoilerEmptiesWhilePotRemoved()
+        {
+            NormalFill();
+            api.potPresent = false;
+            Poll();
+            api.boilerEmpty = true;
+            Poll();
+            Assert.IsFalse(api.boilerOn);
+            Assert.IsTrue(api.lightOn);
+            Assert.IsFalse(api.plateOn);
+            Assert.IsTrue(api.valveClosed);
+
+            api.potPresent = true;
+            Poll();
+            Assert.IsFalse(api.boilerOn);
+            Assert.IsTrue(api.lightOn);
+            Assert.IsTrue(api.plateOn);
+            Assert.IsTrue(api.valveClosed);
+        }
+
+        [Test]
+        public void EmptyPotReturnedAfter()
+        {
+            NormalBrew();
+            api.potNotEmpty = false;
+            Poll();
+            Assert.IsFalse(api.boilerOn);
+            Assert.IsFalse(api.lightOn);
+            Assert.IsFalse(api.plateOn);
+            Assert.IsTrue(api.valveClosed);
+        }
     }
 }
