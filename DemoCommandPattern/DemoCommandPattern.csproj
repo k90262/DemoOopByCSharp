@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="ActiveObject\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ActiveObjectPattern\" />
+  </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1700.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCommandPattern", "DemoCommandPattern\DemoCommandPattern.csproj", "{8316E377-EF0A-4580-ADD7-029C7010F073}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCommandPattern.Test", "DemoCommandPattern.Test\DemoCommandPattern.Test.csproj", "{C5CA0B2B-C359-40B4-B420-999AF2D029FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8316E377-EF0A-4580-ADD7-029C7010F073}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8316E377-EF0A-4580-ADD7-029C7010F073}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8316E377-EF0A-4580-ADD7-029C7010F073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CA0B2B-C359-40B4-B420-999AF2D029FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CA0B2B-C359-40B4-B420-999AF2D029FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CA0B2B-C359-40B4-B420-999AF2D029FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CA0B2B-C359-40B4-B420-999AF2D029FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
