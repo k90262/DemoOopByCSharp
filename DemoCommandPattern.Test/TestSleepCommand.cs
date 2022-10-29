@@ -2,7 +2,7 @@
 
 namespace DemoCommandPattern.Test;
 
-public class Tests
+public class TestSleepCommand
 {
     private class WakeUpCommand : Command
     {
