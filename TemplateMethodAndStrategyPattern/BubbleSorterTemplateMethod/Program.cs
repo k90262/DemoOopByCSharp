@@ -2,7 +2,8 @@
 Console.WriteLine("Hello, World, Sorter!");
 
 int[] random_array = new int[] {5, 2, 9, 1};
-int operations = BubbleSorter.Sort(random_array);
+IntBubbleSorter sorter = new IntBubbleSorter();
+int operations = sorter.Sort(random_array);
 for (int i = 0; i < random_array.Length; i++) {
     Console.WriteLine($"{i} {random_array[i]}");
 }
