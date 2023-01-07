@@ -1,20 +1,23 @@
-public class DoubleBubbleSorter : BubbleSorter
+public class DoubleSortHandler : SortHandler
 {
     private double[] array = null;
 
-    public int Sort(double[] theArray)
+    public int Length()
     {
-        array = theArray;
-        length = array.Length;
-        return DoSort();
+        return array.Length;
     }
 
-    protected override bool OutOfOrder(int index)
+    public bool OutOfOrder(int index)
     {
         return (array[index] > array[index+1]);
     }
 
-    protected override void Swap(int index)
+    public void SetArray(object array)
+    {
+        this.array = (double[]) array;
+    }
+
+    public void Swap(int index)
     {
         double temp = array[index];
         array[index] = array[index+1];

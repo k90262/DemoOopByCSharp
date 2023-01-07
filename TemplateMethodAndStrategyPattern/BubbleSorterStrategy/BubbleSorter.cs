@@ -1,10 +1,18 @@
-public abstract class BubbleSorter 
+public class BubbleSorter 
 {
     private int operations = 0;
     protected int length = 0;
+    private SortHandler itsSortHandler;
 
-    protected int DoSort() 
+    public BubbleSorter(SortHandler handler) 
     {
+        itsSortHandler = handler;
+    }
+
+    public int Sort(object array) 
+    {
+        itsSortHandler.SetArray(array);
+        length = itsSortHandler.Length();
         operations = 0;
         if (length <= 1)
             return operations;
@@ -12,15 +20,11 @@ public abstract class BubbleSorter
         for (int nextToLast = length-2; nextToLast >= 0; nextToLast--)
             for (int index = 0; index <= nextToLast; index++)
             {
-                if (OutOfOrder(index))
-                    Swap(index);
+                if (itsSortHandler.OutOfOrder(index))
+                    itsSortHandler.Swap(index);
                 operations++;
             }
         
         return operations;
     }
-
-    protected abstract bool OutOfOrder(int index);
-
-    protected abstract void Swap(int index);
 }
